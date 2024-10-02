@@ -1,4 +1,6 @@
+// import * as basicLightbox from 'basicLightbox'
 import { galleryItems } from './gallery-items.js';
+// import * as basicLightbox from 'basiclightbox'
 // Change code below this line
 
 console.log(galleryItems);
@@ -25,8 +27,17 @@ function createGalleryImage (items) {
 galleryList.addEventListener('click', onImageClick)
 
 function onImageClick (event) {
-    
-    if (event.target.classList.contains('gallery__link')) {
-    console.dir(event.target.alt);
+  event.preventDefault()
+  
+  if (event.target.nodeName === 'IMG') {
+   
+    const instance = basicLightbox.create(`
+      <div class="modal">
+          <img src="${event.target.dataset.source}" width="800" height="600">
+      </div>
+  `)
+  
+  instance.show()
 }
 }
+
