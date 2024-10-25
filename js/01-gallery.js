@@ -36,11 +36,21 @@ function onImageClick(event) {
 }
 
 function creareModalFromImage(image) {
-  const instance = basicLightbox.create(`
+  const instance = basicLightbox.create(
+    `
     <div class="modal">
         <img src="${image}">
     </div>
-`);
+`,
+    {
+      onShow: (instance) => {
+        document.addEventListener("keydown", onEscKeyPress);
+      },
+      onClose: (instance) => {
+        document.removeEventListener("keydown", onEscKeyPress);
+      },
+    }
+  );
 
   instance.show();
 
